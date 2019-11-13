@@ -4,6 +4,8 @@
  * @requires express
  */
 
+let caseController = require('../models/controller/cases-controller');
+
 const express = require('express');
 const router = express.Router();
 const { prisma } = require('../../prisma-database/generated/prisma-client');
@@ -16,10 +18,10 @@ const auth = require('../auth/middleware');
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - the newly created case object
  */
-router.post('/case', auth, async (req, res) => {
-  const newCase = await prisma.createCase(req.body);
-  res.json(newCase);
-});
+// router.post('/case', auth, async (req, res) => {
+//   const newCase = await prisma.createCase(req.body);
+//   res.json(newCase);
+// });
 
 /**
  * This function gets all case data from database
@@ -28,10 +30,10 @@ router.post('/case', auth, async (req, res) => {
  * @param {function} callback - express callback
  * @returns { (Array | Error) } - an array of all cases
  */
-router.get('/cases', async (req, res) => {
-  const retrievedCase = await prisma.cases().$fragment(getCaseByIdFragment);
-  res.json(retrievedCase);
-});
+// router.get('/cases', async (req, res) => {
+//   const retrievedCase = await prisma.cases().$fragment(getCaseByIdFragment);
+//   res.json(retrievedCase);
+// });
 
 /**
  * This function gets a case from database
@@ -40,15 +42,15 @@ router.get('/cases', async (req, res) => {
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - a single case object
  */
-router.get('/case/:id', auth, async (req, res) => {
-  const retrievedCase = await prisma.cases({
-    where: {
-      id: req.params.id,
-    },
-  }).$fragment(getCaseByIdFragment);
+// router.get('/case/:id', auth, async (req, res) => {
+//   const retrievedCase = await prisma.cases({
+//     where: {
+//       id: req.params.id,
+//     },
+//   }).$fragment(getCaseByIdFragment);
 
-  res.json(retrievedCase);
-});
+//   res.json(retrievedCase);
+// });
 
 /**
  * This function gets a case from database
@@ -57,81 +59,81 @@ router.get('/case/:id', auth, async (req, res) => {
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - a single case object that was created
  */
-router.patch('/case/:id', auth, async (req, res) => {
-  const updatedCase = await prisma.updateCase({
-    data: req.body,
-    where: {
-      id : req.params.id,
-    },
-  }).$fragment(getCaseByIdFragment);
+// router.patch('/case/:id', auth, async (req, res) => {
+//   const updatedCase = await prisma.updateCase({
+//     data: req.body,
+//     where: {
+//       id : req.params.id,
+//     },
+//   }).$fragment(getCaseByIdFragment);
 
-  res.json(updatedCase);
-});
+//   res.json(updatedCase);
+// });
 
 
-const getCaseByIdFragment = `
-fragment CaseWithContacts on Case {
-  id
-  caseId
-  title
-  status
-  referralType
-  legalPlan
-  importantDates {
-    id
-  }
-  caseNumberDetails
-  generalCaseDetails
-  caseContacts {
-    id
-    firstName
-    lastName
-  }
-  client {
-    id
-    firstName
-    lastName
-  }
-  staffAttorneys {
-    id
-    firstName
-    lastName
-  }
-  staffAssistants {
-    id
-    firstName
-    lastName
-  }
-  opposingParties {
-    id
-    firstName
-    lastName
-  }
-  opposingAttorneys {
-    id
-    firstName
-    lastName
-  }
-  referringParties {
-    id
-    firstName
-    lastName
-  }
-  associatedContacts {
-    id
-    firstName
-    lastName
-  }
-  caseNotes {
-    id
-    dateCreated
-    title
-    author {
-      userName
-    }
-  }
-}
-`;
+// const getCaseByIdFragment = `
+// fragment CaseWithContacts on Case {
+//   id
+//   caseId
+//   title
+//   status
+//   referralType
+//   legalPlan
+//   importantDates {
+//     id
+//   }
+//   caseNumberDetails
+//   generalCaseDetails
+//   caseContacts {
+//     id
+//     firstName
+//     lastName
+//   }
+//   client {
+//     id
+//     firstName
+//     lastName
+//   }
+//   staffAttorneys {
+//     id
+//     firstName
+//     lastName
+//   }
+//   staffAssistants {
+//     id
+//     firstName
+//     lastName
+//   }
+//   opposingParties {
+//     id
+//     firstName
+//     lastName
+//   }
+//   opposingAttorneys {
+//     id
+//     firstName
+//     lastName
+//   }
+//   referringParties {
+//     id
+//     firstName
+//     lastName
+//   }
+//   associatedContacts {
+//     id
+//     firstName
+//     lastName
+//   }
+//   caseNotes {
+//     id
+//     dateCreated
+//     title
+//     author {
+//       userName
+//     }
+//   }
+// }
+// `;
 
 // router.post('/caseContactsNotes', async (req, res) => {
 //   const newCase = await prisma.createCase(req.body.case);
@@ -139,5 +141,10 @@ fragment CaseWithContacts on Case {
 //   const newNote = await prisma.createNote(req.body.note);
 //   res.json(newCase, newContact, newNote);
 // });
+
+router.post('/case', auth, caseController.handleNewCase);
+router.get('/cases', caseController.handleGetAllCases);
+router.get('/case/:id', auth, caseController.handleGetCaseById);
+router.patch('/case/:id', auth, caseController.getCaseFromDB);
 
 module.exports = router;
