@@ -274,6 +274,8 @@ export type ImportantDateOrderByInput =
 export type ContactOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "googleResourceName_ASC"
+  | "googleResourceName_DESC"
   | "contactType_ASC"
   | "contactType_DESC"
   | "firstName_ASC"
@@ -439,6 +441,20 @@ export interface ContactWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  googleResourceName?: Maybe<String>;
+  googleResourceName_not?: Maybe<String>;
+  googleResourceName_in?: Maybe<String[] | String>;
+  googleResourceName_not_in?: Maybe<String[] | String>;
+  googleResourceName_lt?: Maybe<String>;
+  googleResourceName_lte?: Maybe<String>;
+  googleResourceName_gt?: Maybe<String>;
+  googleResourceName_gte?: Maybe<String>;
+  googleResourceName_contains?: Maybe<String>;
+  googleResourceName_not_contains?: Maybe<String>;
+  googleResourceName_starts_with?: Maybe<String>;
+  googleResourceName_not_starts_with?: Maybe<String>;
+  googleResourceName_ends_with?: Maybe<String>;
+  googleResourceName_not_ends_with?: Maybe<String>;
   contactType?: Maybe<String>;
   contactType_not?: Maybe<String>;
   contactType_in?: Maybe<String[] | String>;
@@ -1161,6 +1177,7 @@ export interface ContactCreateManyInput {
 
 export interface ContactCreateInput {
   id?: Maybe<ID_Input>;
+  googleResourceName?: Maybe<String>;
   contactType?: Maybe<String>;
   firstName: String;
   lastName: String;
@@ -1371,6 +1388,7 @@ export interface ContactUpdateWithWhereUniqueNestedInput {
 }
 
 export interface ContactUpdateDataInput {
+  googleResourceName?: Maybe<String>;
   contactType?: Maybe<String>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -1421,6 +1439,20 @@ export interface ContactScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  googleResourceName?: Maybe<String>;
+  googleResourceName_not?: Maybe<String>;
+  googleResourceName_in?: Maybe<String[] | String>;
+  googleResourceName_not_in?: Maybe<String[] | String>;
+  googleResourceName_lt?: Maybe<String>;
+  googleResourceName_lte?: Maybe<String>;
+  googleResourceName_gt?: Maybe<String>;
+  googleResourceName_gte?: Maybe<String>;
+  googleResourceName_contains?: Maybe<String>;
+  googleResourceName_not_contains?: Maybe<String>;
+  googleResourceName_starts_with?: Maybe<String>;
+  googleResourceName_not_starts_with?: Maybe<String>;
+  googleResourceName_ends_with?: Maybe<String>;
+  googleResourceName_not_ends_with?: Maybe<String>;
   contactType?: Maybe<String>;
   contactType_not?: Maybe<String>;
   contactType_in?: Maybe<String[] | String>;
@@ -1810,6 +1842,7 @@ export interface ContactUpdateManyWithWhereNestedInput {
 }
 
 export interface ContactUpdateManyDataInput {
+  googleResourceName?: Maybe<String>;
   contactType?: Maybe<String>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -2004,6 +2037,7 @@ export interface CaseUpdateManyMutationInput {
 }
 
 export interface ContactUpdateInput {
+  googleResourceName?: Maybe<String>;
   contactType?: Maybe<String>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -2034,6 +2068,7 @@ export interface ContactUpdateInput {
 }
 
 export interface ContactUpdateManyMutationInput {
+  googleResourceName?: Maybe<String>;
   contactType?: Maybe<String>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -2560,6 +2595,7 @@ export interface ImportantDateNullablePromise
 
 export interface Contact {
   id: ID_Output;
+  googleResourceName?: String;
   contactType?: String;
   firstName: String;
   lastName: String;
@@ -2591,6 +2627,7 @@ export interface Contact {
 
 export interface ContactPromise extends Promise<Contact>, Fragmentable {
   id: () => Promise<ID_Output>;
+  googleResourceName: () => Promise<String>;
   contactType: () => Promise<String>;
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
@@ -2624,6 +2661,7 @@ export interface ContactSubscription
   extends Promise<AsyncIterator<Contact>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  googleResourceName: () => Promise<AsyncIterator<String>>;
   contactType: () => Promise<AsyncIterator<String>>;
   firstName: () => Promise<AsyncIterator<String>>;
   lastName: () => Promise<AsyncIterator<String>>;
@@ -2657,6 +2695,7 @@ export interface ContactNullablePromise
   extends Promise<Contact | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  googleResourceName: () => Promise<String>;
   contactType: () => Promise<String>;
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
@@ -3163,6 +3202,7 @@ export interface ContactSubscriptionPayloadSubscription
 
 export interface ContactPreviousValues {
   id: ID_Output;
+  googleResourceName?: String;
   contactType?: String;
   firstName: String;
   lastName: String;
@@ -3196,6 +3236,7 @@ export interface ContactPreviousValuesPromise
   extends Promise<ContactPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  googleResourceName: () => Promise<String>;
   contactType: () => Promise<String>;
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
@@ -3229,6 +3270,7 @@ export interface ContactPreviousValuesSubscription
   extends Promise<AsyncIterator<ContactPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  googleResourceName: () => Promise<AsyncIterator<String>>;
   contactType: () => Promise<AsyncIterator<String>>;
   firstName: () => Promise<AsyncIterator<String>>;
   lastName: () => Promise<AsyncIterator<String>>;

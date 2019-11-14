@@ -76,10 +76,14 @@ async function handleCreateNewContact(req, res) {
   console.log('=====> googleToken', googleToken);
 
   console.log('req.body ========> ', req.body);
+  
 
+  const givenName = req.body.firstName;
+  const familyName = req.body.lastName;
   const personId = await postContact(googleToken, givenName);
   console.log('googlePerson  ========>', personId);
   req.body.googleResourceName = personId;
+  console.log('req.body ========> ', req.body);
 
   const newContact = await prisma.createContact(req.body);
   console.log('prisma newContact ========>', newContact);

@@ -369,6 +369,7 @@ input CaseWhereUniqueInput {
 
 type Contact {
   id: ID!
+  googleResourceName: String
   contactType: String
   firstName: String!
   lastName: String!
@@ -406,6 +407,7 @@ type ContactConnection {
 
 input ContactCreateInput {
   id: ID
+  googleResourceName: String
   contactType: String
   firstName: String!
   lastName: String!
@@ -453,6 +455,8 @@ type ContactEdge {
 enum ContactOrderByInput {
   id_ASC
   id_DESC
+  googleResourceName_ASC
+  googleResourceName_DESC
   contactType_ASC
   contactType_DESC
   firstName_ASC
@@ -511,6 +515,7 @@ enum ContactOrderByInput {
 
 type ContactPreviousValues {
   id: ID!
+  googleResourceName: String
   contactType: String
   firstName: String!
   lastName: String!
@@ -555,6 +560,20 @@ input ContactScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  googleResourceName: String
+  googleResourceName_not: String
+  googleResourceName_in: [String!]
+  googleResourceName_not_in: [String!]
+  googleResourceName_lt: String
+  googleResourceName_lte: String
+  googleResourceName_gt: String
+  googleResourceName_gte: String
+  googleResourceName_contains: String
+  googleResourceName_not_contains: String
+  googleResourceName_starts_with: String
+  googleResourceName_not_starts_with: String
+  googleResourceName_ends_with: String
+  googleResourceName_not_ends_with: String
   contactType: String
   contactType_not: String
   contactType_in: [String!]
@@ -957,6 +976,7 @@ input ContactSubscriptionWhereInput {
 }
 
 input ContactUpdateDataInput {
+  googleResourceName: String
   contactType: String
   firstName: String
   lastName: String
@@ -987,6 +1007,7 @@ input ContactUpdateDataInput {
 }
 
 input ContactUpdateInput {
+  googleResourceName: String
   contactType: String
   firstName: String
   lastName: String
@@ -1017,6 +1038,7 @@ input ContactUpdateInput {
 }
 
 input ContactUpdateManyDataInput {
+  googleResourceName: String
   contactType: String
   firstName: String
   lastName: String
@@ -1059,6 +1081,7 @@ input ContactUpdateManyInput {
 }
 
 input ContactUpdateManyMutationInput {
+  googleResourceName: String
   contactType: String
   firstName: String
   lastName: String
@@ -1133,6 +1156,20 @@ input ContactWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  googleResourceName: String
+  googleResourceName_not: String
+  googleResourceName_in: [String!]
+  googleResourceName_not_in: [String!]
+  googleResourceName_lt: String
+  googleResourceName_lte: String
+  googleResourceName_gt: String
+  googleResourceName_gte: String
+  googleResourceName_contains: String
+  googleResourceName_not_contains: String
+  googleResourceName_starts_with: String
+  googleResourceName_not_starts_with: String
+  googleResourceName_ends_with: String
+  googleResourceName_not_ends_with: String
   contactType: String
   contactType_not: String
   contactType_in: [String!]
