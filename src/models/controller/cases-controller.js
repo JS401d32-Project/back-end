@@ -7,6 +7,8 @@ const express = require('express');
 const router = express.Router();
 const { prisma } = require('../../../prisma-database/generated/prisma-client');
 const auth = require('../../auth/middleware');
+
+
 /**
  * This function creates a new case in the database
  * @function POST
@@ -42,8 +44,11 @@ async function handleGetCaseById (req, res){
       id: req.params.id,
     },
   }).$fragment(getCaseByIdFragment);
+
   res.json(retrievedCase);
 }
+
+
 /**
  * This function gets a case from database
  * @function PATCH/:id
@@ -58,8 +63,12 @@ async function getCaseFromDB (req, res) {
       id : req.params.id,
     },
   }).$fragment(getCaseByIdFragment);
+
   res.json(updatedCase);
 }
+
+
+
 const getCaseByIdFragment = `
 fragment CaseWithContacts on Case {
   id
@@ -123,6 +132,8 @@ fragment CaseWithContacts on Case {
   }
 }
 `;
+
+
 module.exports = {
   handleNewCase,
   handleGetAllCases,

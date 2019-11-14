@@ -10,6 +10,8 @@ const express = require('express');
 const router = express.Router();
 const { prisma } = require('../../prisma-database/generated/prisma-client');
 const auth = require('../auth/middleware');
+// let caseController = require('../models/controller/cases-controller');
+
 
 /**
  * This function creates a new case in the database
@@ -133,7 +135,13 @@ const auth = require('../auth/middleware');
 //     }
 //   }
 // }
-// `;
+// // `;
+
+// router.post('/case', auth, caseController.handleNewCase);
+// router.get('/cases', caseController.handleGetAllCases);
+// router.get('/case/:id', auth, caseController.handleGetCaseById);
+// router.patch('/case/:id', auth, caseController.getCaseFromDB);
+
 
 // router.post('/caseContactsNotes', async (req, res) => {
 //   const newCase = await prisma.createCase(req.body.case);

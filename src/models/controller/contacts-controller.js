@@ -17,6 +17,7 @@ const people_api = require('./contacts-people-api');
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - the newly created contact object
  */
+
 async function handleCreateNewContact(req,res){
   const newContact = await prisma.createContact(req.body);
   res.json(newContact);
