@@ -1,72 +1,17 @@
 'use strict';
 
 const superagent = require('superagent');
-const cookieParser = require('cookie-parser');
 const { prisma } = require('../../../prisma-database/generated/prisma-client');
-const jwt = require('jsonwebtoken');
 
 /** 
-* This function is used for both fetching the contacts, and also the function that 
-* fetches and imports contacts to the database.
-* @params {request}
-* @returns {object} - the contacts from the People API
-*/
-const fetchContactsRoute = async (request, response) => {
-  // alternatively, you can used the cookie line below as opposed to the authString, but cookies are not implemented on the front end as of now.
-  // const signed_token = request.cookies['X-401d19-OAuth-token'];
-  let [authType, authString] = request.headers.authorization.split(/\s+/);
-  const signed_token = authString;
-  const token = jwt.verify(signed_token, process.env.SECRET);
-  const peeps = await fetchContacts(token.googleToken);
-  response.json(peeps);
-};
-
-/**
-* This function imports the fetched contacts into the prisma database
-* @params {request}
-* @returns {object} - the imported contacts
-*/
-const importContactsRoute = async (request, response) => {
-  // alternatively, you can used the cookie line below as opposed to the authString, but cookies are not implemented on the front end as of now. 
-  // const signed_token = request.cookies['X-401d19-OAuth-token'];
-  let [authType, authString] = request.headers.authorization.split(/\s+/);
-  const signed_token = authString;
-  const token = jwt.verify(signed_token, process.env.SECRET);
-  const peeps = await fetchContacts(token.googleToken);
-  const imported_peeps = await importContacts(peeps);
-  // we're also going to save them to the database
-  // we will get nulls if they already exist in the database
-  // we don't want to show nulls, so we use filter
-  response.json(imported_peeps.filter(x => x));
-};
-
-/**
-* This function will create a new contact in Google Contacts using the People API
-* This will be done when a new contact is created using the /contact route
-* Therefore, the contact info will be in the prisma database as well as Google Contacts.
-* @params {object} - will contain the new contact entry
-* @returns {} - nothing needed to be returned
-*/
-const postContactRoute = async (req, res) => {
-  // const signed_token = req.cookies['X-401d19-OAuth-token'];
-  let [, authString] = req.headers.authorization.split(/\s+/);
-  const signed_token = authString;
-  console.log('=====> signed_token', signed_token);
-
-  const token = jwt.verify(signed_token, process.env.SECRET);
-  
-  const givenName = req.body.firstName;
-  const familyName = req.body.lastName;
-  const phoneNumbers = [req.body.cellPhone, req.body.workPhone, req.body.homePhone];
-  const emailAddresses = [req.body.emailMain, req.body.emailBackup]; // TODO:
-  const person = await postContact(token.googleToken, givenName, emailAddresses, phoneNumbers);
-};
-
-/** 
-* This function imports the contact(s) fetched from google contacts using the People API
-* @params {object} - peeps - The contact object we are importing to the database
-* @returns {object} - returns all the new contacts we have imported into the database
-*/
+ * This function imports the contact(s) fetched from google contacts  
+ * using the People API
+ * 
+ * @param {object} - peeps - The contact object we are importing to the
+ * database
+ * @returns {object} - returns all the new contacts we have imported
+ * into the database
+ */
 const importContacts = async (peeps) => {  
   // Let's do an array of creates, these are all promises
   const creates = peeps.map(peep => {
@@ -83,10 +28,12 @@ const importContacts = async (peeps) => {
 const emptyIfNull = (val) => val ? val : '';
 
 /**
-  * This function will fetch all of the user's contacts from the people API
-  * @params {string} - googleToken
-  * @returns {object} - contact object
-*/
+ * This function will fetch all of the user's contacts from the people
+ * API.
+ * 
+ * @param {string} - googleToken
+ * @returns {object} - contact object
+ */
 const fetchContacts = (googleToken) => {
   // This query gets all contacts
   // people/me/connections gets all of the contacts belonging to "me" (user)
@@ -114,11 +61,15 @@ const fetchContacts = (googleToken) => {
 };
 
 /**
- * This function will create a new contact in Google Contacts using the People API
- * This will be done when a new contact is created using the /contact route
- * @param {string} - googleToken, givenName, email Addresses, phoneNumbers
- * @returns {object} - new contact entry
-*/
+ * This function will create a new contact in Google Contacts using the 
+ * People API.
+ * This will be done when a new contact is created using the /contact 
+ * route.
+ * 
+ * @param {string} - googleToken, givenName, email Addresses, 
+ * phoneNumbers
+ * @returns {String} - The unique ID assigned by Google for the new Google contact
+ */
 const postContact = (googleToken, givenName, emailAddresses, phoneNumbers) => {
   // This query gets all contacts
   return superagent.post('https://people.googleapis.com/v1/people:createContact')
@@ -290,7 +241,7 @@ const postContact = (googleToken, givenName, emailAddresses, phoneNumbers) => {
 };
 
 module.exports = {
-  fetch: fetchContactsRoute,
-  import: importContactsRoute,
-  create: postContactRoute,
+  fetchContacts,
+  importContacts,
+  postContact,
 };
