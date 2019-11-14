@@ -3,6 +3,7 @@
  * @module router/notes
  * @requires express
  */
+
 const express = require('express');
 const router = express.Router();
 const { prisma } = require('../../../prisma-database/generated/prisma-client');
@@ -15,7 +16,6 @@ const auth = require('../../auth/middleware');
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - the newly created note object
  */
-
 async function handleNewNote(req, res){
   const newNote = await prisma.createNote(req.body);
   res.json(newNote);
@@ -28,7 +28,6 @@ async function handleNewNote(req, res){
  * @param {function} callback - express callback
  * @returns { (Array | Error) } - an array of all notes
  */
-
 async function handleGetNoteDataDB(req, res){
   const notes = await prisma.notes({
     where: {
@@ -45,7 +44,6 @@ async function handleGetNoteDataDB(req, res){
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - a single note object
  */
-
 async function handleGetNoteDB(req,res){
   const note = await prisma.notes({
     where: {

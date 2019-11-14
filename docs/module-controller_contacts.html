@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: router/cases</title>
+    <title>JSDoc: Module: controller/contacts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: router/cases</h1>
+    <h1 class="page-title">Module: controller/contacts</h1>
 
     
 
@@ -48,6 +48,8 @@
 
         <ul>
             <li>module:express</li>
+        
+            <li>module:fuzzy-search</li>
         </ul>
     
 
@@ -78,7 +80,7 @@
 
 
 <div class="description">
-    This function gets all case data from database
+    This function gets all constact data from database
 </div>
 
 
@@ -130,7 +132,7 @@
 
             
 
-            <td class="description last">express path</td>
+            <td class="description last">express path - *optional name query field</td>
         </tr>
 
     
@@ -194,7 +196,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_cases-router.js.html">routes/cases-router.js</a>, <a href="routes_cases-router.js.html#line26">line 26</a>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -223,7 +225,7 @@
 
         
 <div class="param-desc">
-    - an array of all cases
+    - an array of all constacts optionally filtered by 'name' query
 </div>
 
 
@@ -248,6 +250,15 @@
 
 
 
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example query string</p>
+    
+    <pre class="prettyprint"><code>localhost:4000/constact/?name=john
+returns all constacts that have John in the first or last name fields
+filtered and sorted by fuzzy search</code></pre>
+
+
 
         
             
@@ -263,7 +274,7 @@
 
 
 <div class="description">
-    This function gets a case from database
+    This function gets a contact from database
 </div>
 
 
@@ -379,7 +390,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_cases-router.js.html">routes/cases-router.js</a>, <a href="routes_cases-router.js.html#line39">line 39</a>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -408,192 +419,7 @@
 
         
 <div class="param-desc">
-    - a single case object
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-|
-
-<span class="param-type">Error</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~PATCH/:id"><span class="type-signature">(inner) </span>PATCH/:id<span class="signature">(path, callback)</span><span class="type-signature"> &rarr; {Object|Error}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function gets a case from database
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">express path</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">express callback</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_cases-router.js.html">routes/cases-router.js</a>, <a href="routes_cases-router.js.html#line56">line 56</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - a single case object that was created
+    - a single contact object
 </div>
 
 
@@ -633,7 +459,7 @@
 
 
 <div class="description">
-    This function creates a new case in the database
+    This function creates a new contact in the database
 </div>
 
 
@@ -749,7 +575,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_cases-router.js.html">routes/cases-router.js</a>, <a href="routes_cases-router.js.html#line14">line 14</a>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -778,7 +604,7 @@
 
         
 <div class="param-desc">
-    - the newly created case object
+    - the newly created contact object
 </div>
 
 

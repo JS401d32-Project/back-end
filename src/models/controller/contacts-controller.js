@@ -20,8 +20,19 @@ const people_api = require('./contacts-people-api');
 
 async function handleCreateNewContact(req,res){
   const newContact = await prisma.createContact(req.body);
+  console.log('prisma newContact ========>', newContact);
+
+  const signed_token = req.cookies['X-401d19-OAuth-token'];
+  console.log('=====> signed_token', signed_token);
+
+  console.log('req.body ========> ', req.body);
+
+  const googlePerson = await people_api.create(req, res);
+  console.log('googlePerson  ========>', googlePerson);
+
   res.json(newContact);
 }
+
 /**
  * This function gets all constact data from database
  * @function GET

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: auth/users-model.js</title>
+    <title>JSDoc: Source: models/controller/notes-controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: auth/users-model.js</h1>
+    <h1 class="page-title">Source: models/controller/notes-controller.js</h1>
 
     
 
@@ -28,50 +28,82 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
 /**
- * User Model
- * @module src/auth/users-model
+ * @module router/notes
+ * @requires express
  */
 
-const jwt = require('jsonwebtoken');
-const { prisma } = require('../../prisma-database/generated/prisma-client');
+const express = require('express');
+const router = express.Router();
+const { prisma } = require('../../../prisma-database/generated/prisma-client');
+const auth = require('../../auth/middleware');
 
 /**
- *
- * @param token
- * @returns {Promise&lt;never>|void|Query}
+ * This function creates a new note in the database
+ * @function POST
+ * @param {string} path - Express Path
+ * @param {function} callback - express callback
+ * @returns { (Object | Error) } - the newly created note object
  */
-const authenticateToken = function(token) {
-  try {
-    let parsedToken = jwt.verify(token, process.env.SECRET);
-    let query = {id: parsedToken.id};
-    return prisma.user(query);
-  } catch (error) {
-    throw new Error('Invalid Token');
-  }
-};
+async function handleNewNote(req, res){
+  const newNote = await prisma.createNote(req.body);
+  res.json(newNote);
+}
 
 /**
- *
- * @param type
- * @returns {undefined|*}
+ * This function gets all note data from database
+ * @function GET
+ * @param {string} path - express path
+ * @param {function} callback - express callback
+ * @returns { (Array | Error) } - an array of all notes
  */
-const generateToken = (user, googleToken) => {
+async function handleGetNoteDataDB(req, res){
+  const notes = await prisma.notes({
+    where: {
+      id: req.params.id,
+    },
+  }).$fragment(getNoteByIdFragment);
+  res.json(notes);
+}
 
-  let token = {
-    id: user.id,
-    googleToken: googleToken,
-  };
+/**
+ * This function gets a note from database
+ * @function GET/:id
+ * @param {string} path - express path
+ * @param {function} callback - express callback
+ * @returns { (Object | Error) } - a single note object
+ */
+async function handleGetNoteDB(req,res){
+  const note = await prisma.notes({
+    where: {
+      id: req.params.id,
+    },
+  }).$fragment(getNoteByIdFragment);
+  res.json(note);
+}
 
-  let signOptions = { expiresIn: process.env.TOKEN_EXPIRE_TIME};
 
-  return jwt.sign(token, process.env.SECRET, signOptions);
-};
+const getNoteByIdFragment = `
+    fragment NotesWithAuthors on Notes {
+      id
+      dateCreated
+      case {
+        id
+        caseId
+      }
+      title
+      content
+      author {
+        userName
+      }
+      type
+    }
+`;
 
 module.exports = {
-  authenticateToken,
-  generateToken,
-};
-</code></pre>
+  handleNewNote,
+  handleGetNoteDataDB,
+  handleGetNoteDB,
+};</code></pre>
         </article>
     </section>
 

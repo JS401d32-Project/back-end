@@ -24,6 +24,7 @@ const contacts_controller = require('../models/controller/contacts-controller');
 
 router.post('/contact', auth, contacts_controller.handleCreateNewContact);
 
+
 /**
  * This function gets all constact data from database
  * @function GET

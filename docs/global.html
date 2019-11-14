@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, callback)</span><span class="type-signature"> &rarr; {Array|Error}</span></h4>
+    <h4 class="name" id="authorize"><span class="type-signature"></span>authorize<span class="signature">(request)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
 
     
@@ -112,7 +112,8 @@
 
 
 <div class="description">
-    This function gets all constact data from database
+    Retrieves a session token for a user associated with the authorizing Google
+profile. This creates a user model in the database if one doesn't exist.
 </div>
 
 
@@ -148,15 +149,10 @@
 
         <tr>
             
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>request</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
             
             </td>
 
@@ -164,30 +160,7 @@
 
             
 
-            <td class="description last">express path - *optional name query field</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">express callback</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -228,7 +201,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_contacts-router.js.html">routes/contacts-router.js</a>, <a href="routes_contacts-router.js.html#line20">line 20</a>
+        <a href="auth_oauth_google.js.html">auth/oauth/google.js</a>, <a href="auth_oauth_google.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -256,10 +229,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    - an array of all constacts optionally filtered by 'name' query
-</div>
-
 
 
 <dl>
@@ -268,10 +237,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array</span>
-|
-
-<span class="param-type">Error</span>
+<span class="param-type">Promise</span>
 
 
     </dd>
@@ -282,13 +248,463 @@
 
 
 
-    <h5>Example</h5>
+
+        
+            
+
     
-        <p class="code-caption">Example query string</p>
+
     
-    <pre class="prettyprint"><code>localhost:4000/constact/?name=john
-returns all constacts that have John in the first or last name fields
-filtered and sorted by fuzzy search</code></pre>
+    <h4 class="name" id="authorize"><span class="type-signature"></span>authorize<span class="signature">(credentials, callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Create an OAuth2 client with the given credentials, and then execute the
+given callback function.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>credentials</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The authorization client credentials.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to call with the authorized client.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_google-people-router.js.html">routes/google-people-router.js</a>, <a href="routes_google-people-router.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getNewToken"><span class="type-signature"></span>getNewToken<span class="signature">(oAuth2Client, callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get and store new token after prompting for user authorization, and then
+execute the given callback with the authorized OAuth2 client.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>oAuth2Client</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">google.auth.OAuth2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The OAuth2 client to get token for.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">getEventsCallback</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback for the authorized client.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_google-people-router.js.html">routes/google-people-router.js</a>, <a href="routes_google-people-router.js.html#line44">line 44</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="listConnectionNames"><span class="type-signature"></span>listConnectionNames<span class="signature">(auth)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Print the display name if available for 10 connections.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>auth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">google.auth.OAuth2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An authorized OAuth2 client.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_google-people-router.js.html">routes/google-people-router.js</a>, <a href="routes_google-people-router.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -662,13 +1078,13 @@ filtered and sorted by fuzzy search</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-middleware_404.html">middleware/404</a></li><li><a href="module-middleware_error.html">middleware/error</a></li><li><a href="module-routes_cases-router.html">routes/cases-router</a></li><li><a href="module-src_auth_users-model.html">src/auth/users-model</a></li></ul><h3>Global</h3><ul><li><a href="global.html#GET">GET</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-controller_cases.html">controller/cases</a></li><li><a href="module-controller_contacts.html">controller/contacts</a></li><li><a href="module-middleware_404.html">middleware/404</a></li><li><a href="module-middleware_error.html">middleware/error</a></li><li><a href="module-router_cases.html">router/cases</a></li><li><a href="module-router_contacts.html">router/contacts</a></li><li><a href="module-router_notes.html">router/notes</a></li><li><a href="module-router_users.html">router/users</a></li><li><a href="module-src_auth_middleware.html">src/auth/middleware</a></li><li><a href="module-src_auth_users-model.html">src/auth/users-model</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authorize">authorize</a></li><li><a href="global.html#getNewToken">getNewToken</a></li><li><a href="global.html#listConnectionNames">listConnectionNames</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Oct 17 2019 11:26:03 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Nov 14 2019 07:40:24 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
