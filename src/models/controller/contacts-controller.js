@@ -1,18 +1,15 @@
 'use strict';
-'use strict';
 /**
  * @module controller/contacts
  * @requires express
  * @requires fuzzy-search
  */
-
 const FuzzySearch = require('fuzzy-search');
 const express = require('express');
 const router = express.Router();
 const { prisma } = require('../../../prisma-database/generated/prisma-client');
 const auth = require('../../auth/middleware');
 const people_api = require('./contacts-people-api');
-
 /**
  * This function creates a new contact in the database
  * @function POST
@@ -36,7 +33,6 @@ async function handleCreateNewContact(req,res){
  * @param {function} callback - express callback
  * @returns { (Array | Error) } - an array of all constacts optionally filtered by 'name' query
  */
-
 async function handleGetContactsFromDB(req, res){
   // if body has a search and name property set
   let nameToFilterBy = req.query && req.query.name;
@@ -52,7 +48,6 @@ async function handleGetContactsFromDB(req, res){
   // return filtered list of contacts
   res.json(result);
 }
-
 /**
  * This function gets a contact from database
  * @function GET/:id
@@ -64,7 +59,6 @@ async function handleGetContactByID(req, res){
   const contact = await prisma.contact({ id: req.params.id });
   res.json(contact);
 }
-
 module.exports = {
   handleCreateNewContact,
   handleGetContactsFromDB,

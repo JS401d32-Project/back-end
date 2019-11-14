@@ -16,10 +16,9 @@ const control_notes = require('../models/controller/notes-controller');
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - the newly created note object
  */
-// router.post('/note', auth, async (req, res) => {
-//   const newNote = await prisma.createNote(req.body);
-//   res.json(newNote);
-// });
+
+router.post('/note', auth, control_notes.handleNewNote);
+
 
 /**
  * This function gets all note data from database
@@ -28,15 +27,8 @@ const control_notes = require('../models/controller/notes-controller');
  * @param {function} callback - express callback
  * @returns { (Array | Error) } - an array of all notes
  */
-// router.get('/notes', auth, async (req, res) => {
-//   const notes = await prisma.notes({
-//     where: {
-//       id: req.params.id,
-//     },
-//   }).$fragment(getNoteByIdFragment);
 
-//   res.json(notes);
-// });
+router.get('/notes', auth, control_notes.handleGetNoteDataDB);
 
 /**
  * This function gets a note from database
@@ -46,35 +38,6 @@ const control_notes = require('../models/controller/notes-controller');
  * @returns { (Object | Error) } - a single note object
  */
 
-// router.get('/note/:id', auth, async (req, res) => {
-//   const note = await prisma.notes({
-//     where: {
-//       id: req.params.id,
-//     },
-//   }).$fragment(getNoteByIdFragment);
-//   res.json(note);
-// });
-
-
-router.post('/note', auth, control_notes.handleNewNote);
-router.get('/notes', auth, control_notes.handleGetNoteDataDB);
 router.get('/note/:id', auth, control_notes.handleGetNoteDB);
-
-// const getNoteByIdFragment = `
-//     fragment NotesWithAuthors on Notes {
-//       id
-//       dateCreated
-//       case {
-//         id
-//         caseId
-//       }
-//       title
-//       content
-//       author {
-//         userName
-//       }
-//       type
-//     }
-// `;
 
 module.exports = router;

@@ -1,10 +1,8 @@
 'use strict';
-
 /**
  * @module controller/cases
  * @requires express
  */
-
 const express = require('express');
 const router = express.Router();
 const { prisma } = require('../../../prisma-database/generated/prisma-client');
@@ -18,12 +16,10 @@ const auth = require('../../auth/middleware');
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - the newly created case object
  */
-
 async function handleNewCase(req, res, next){
   const newCase = await prisma.createCase(req.body);
   res.json(newCase);
 }
-
 /**
  * This function gets all case data from database
  * @function GET
@@ -35,7 +31,6 @@ async function handleGetAllCases(req, res, next) {
   const retrievedCase = await prisma.cases().$fragment(getCaseByIdFragment);
   res.json(retrievedCase);
 }
-
 /**
  * This function gets a case from database
  * @function GET/:id
@@ -43,7 +38,6 @@ async function handleGetAllCases(req, res, next) {
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - a single case object
  */
-
 async function handleGetCaseById (req, res){
   const retrievedCase = await prisma.cases({
     where: {
@@ -146,4 +140,3 @@ module.exports = {
   handleGetCaseById,
   getCaseFromDB,
 };
-
