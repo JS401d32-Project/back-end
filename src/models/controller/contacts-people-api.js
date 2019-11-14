@@ -85,9 +85,9 @@ const postContact = (googleToken, givenName, emailAddresses, phoneNumbers) => {
     .set('Authorization', `Bearer ${googleToken}`)
     .send({
       'names': [{ givenName }],
-      'emailAddresses': [{ 'value': 'emai@niofds.com' }],
-      'phoneNumbers': [{ 'value': 'phone' }],
-    }
+      'emailAddresses': [{ 'value': 'testemail@gmail.com' }],
+      'phoneNumbers': phoneNumbers,
+
       // {
       //   "resourceName": string,
       //   "etag": string,
@@ -237,7 +237,7 @@ const postContact = (googleToken, givenName, emailAddresses, phoneNumbers) => {
       //   ]
       // }
 
-    )
+    })
     .then(googleResponse => {
       console.log('googleResponse dot BODY is ', googleResponse.body);
 
