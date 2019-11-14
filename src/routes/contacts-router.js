@@ -21,7 +21,6 @@ const contacts_controller = require('../models/controller/contacts-controller');
  * @param {function} callback - express callback
  * @returns { (Object | Error) } - the newly created contact object
  */
-
 router.post('/contact', auth, async (req, res) => {
   const signed_token = req.cookies['X-401d19-OAuth-token'];
   console.log('=====> signed_token', signed_token);

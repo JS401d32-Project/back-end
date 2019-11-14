@@ -24,13 +24,11 @@ const importContactsRoute = async (request, response) => {
 };
 
 const postContactRoute = async (req, res) => {
-
-  let [authType, authString] = req.headers.authorization.split(/\s+/);
-
   // const signed_token = req.cookies['X-401d19-OAuth-token'];
+  let [, authString] = req.headers.authorization.split(/\s+/);
   const signed_token = authString;
-
   console.log('=====> signed_token', signed_token);
+
   const token = jwt.verify(signed_token, process.env.SECRET);
   console.log('=====> token', token);
   
@@ -86,10 +84,160 @@ const postContact = (googleToken, givenName, emailAddresses, phoneNumbers) => {
   return superagent.post('https://people.googleapis.com/v1/people:createContact')
     .set('Authorization', `Bearer ${googleToken}`)
     .send({
-      'names': [{givenName}],
-      'emailAddresses': [  {'value': 'emai@niofds.com'} ],
-      'phoneNumbers': [{'value': 'phone'}],
-    })
+      'names': [{ givenName }],
+      'emailAddresses': [{ 'value': 'emai@niofds.com' }],
+      'phoneNumbers': [{ 'value': 'phone' }],
+    }
+      // {
+      //   "resourceName": string,
+      //   "etag": string,
+      //   "metadata": {
+      //     object (PersonMetadata)
+      //   },
+      //   "locales": [
+      //     {
+      //       object (Locale)
+      //     }
+      //   ],
+      //   "names": [
+      //     {
+      //       object (Name)
+      //     }
+      //   ],
+      //   "nicknames": [
+      //     {
+      //       object (Nickname)
+      //     }
+      //   ],
+      //   "coverPhotos": [
+      //     {
+      //       object (CoverPhoto)
+      //     }
+      //   ],
+      //   "photos": [
+      //     {
+      //       object (Photo)
+      //     }
+      //   ],
+      //   "genders": [
+      //     {
+      //       object (Gender)
+      //     }
+      //   ],
+      //   "ageRange": enum (AgeRange),
+      //   "ageRanges": [
+      //     {
+      //       object (AgeRangeType)
+      //     }
+      //   ],
+      //   "birthdays": [
+      //     {
+      //       object (Birthday)
+      //     }
+      //   ],
+      //   "events": [
+      //     {
+      //       object (Event)
+      //     }
+      //   ],
+      //   "addresses": [
+      //     {
+      //       object (Address)
+      //     }
+      //   ],
+      //   "residences": [
+      //     {
+      //       object (Residence)
+      //     }
+      //   ],
+      //   "emailAddresses": [
+      //     {
+      //       object (EmailAddress)
+      //     }
+      //   ],
+      //   "phoneNumbers": [
+      //     {
+      //       object (PhoneNumber)
+      //     }
+      //   ],
+      //   "imClients": [
+      //     {
+      //       object (ImClient)
+      //     }
+      //   ],
+      //   "taglines": [
+      //     {
+      //       object (Tagline)
+      //     }
+      //   ],
+      //   "biographies": [
+      //     {
+      //       object (Biography)
+      //     }
+      //   ],
+      //   "urls": [
+      //     {
+      //       object (Url)
+      //     }
+      //   ],
+      //   "organizations": [
+      //     {
+      //       object (Organization)
+      //     }
+      //   ],
+      //   "occupations": [
+      //     {
+      //       object (Occupation)
+      //     }
+      //   ],
+      //   "interests": [
+      //     {
+      //       object (Interest)
+      //     }
+      //   ],
+      //   "skills": [
+      //     {
+      //       object (Skill)
+      //     }
+      //   ],
+      //   "braggingRights": [
+      //     {
+      //       object (BraggingRights)
+      //     }
+      //   ],
+      //   "relations": [
+      //     {
+      //       object (Relation)
+      //     }
+      //   ],
+      //   "relationshipInterests": [
+      //     {
+      //       object (RelationshipInterest)
+      //     }
+      //   ],
+      //   "relationshipStatuses": [
+      //     {
+      //       object (RelationshipStatus)
+      //     }
+      //   ],
+      //   "memberships": [
+      //     {
+      //       object (Membership)
+      //     }
+      //   ],
+      //   "userDefined": [
+      //     {
+      //       object (UserDefined)
+      //     }
+      //   ],
+      //   "sipAddresses": [
+      //     {
+      //       object (SipAddress)
+      //     }
+      //   ]
+      // }
+
+    )
     .then(googleResponse => {
       console.log('googleResponse dot BODY is ', googleResponse.body);
 
