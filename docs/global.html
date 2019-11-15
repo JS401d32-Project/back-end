@@ -201,7 +201,7 @@ profile. This creates a user model in the database if one doesn't exist.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="auth_oauth_google.js.html">auth/oauth/google.js</a>, <a href="auth_oauth_google.js.html#line15">line 15</a>
+        <a href="auth_oauth_google.js.html">auth/oauth/google.js</a>, <a href="auth_oauth_google.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -255,7 +255,7 @@ profile. This creates a user model in the database if one doesn't exist.
     
 
     
-    <h4 class="name" id="authorize"><span class="type-signature"></span>authorize<span class="signature">(credentials, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="fetchContacts"><span class="type-signature"></span>fetchContacts<span class="signature">(googleToken)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -263,8 +263,8 @@ profile. This creates a user model in the database if one doesn't exist.
 
 
 <div class="description">
-    Create an OAuth2 client with the given credentials, and then execute the
-given callback function.
+    This function will fetch all of the user's contacts from the people
+API.
 </div>
 
 
@@ -300,7 +300,167 @@ given callback function.
 
         <tr>
             
-                <td class="name"><code>credentials</code></td>
+                <td class="name"><code>googleToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_controller_contacts-people-api.js.html">models/controller/contacts-people-api.js</a>, <a href="models_controller_contacts-people-api.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - contact object array
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="generateGoogleContact"><span class="type-signature"></span>generateGoogleContact<span class="signature">(prismaContact)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Based on the given contact data in the form we would store in the DB,
+generate the corresponding Google contact data record.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prismaContact</code></td>
             
 
             <td class="type">
@@ -316,30 +476,7 @@ given callback function.
 
             
 
-            <td class="description last">The authorization client credentials.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The callback to call with the authorized client.</td>
+            <td class="description last">Contact data in the form we receive from the front end or the DB</td>
         </tr>
 
     
@@ -380,7 +517,7 @@ given callback function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_google-people-router.js.html">routes/google-people-router.js</a>, <a href="routes_google-people-router.js.html#line25">line 25</a>
+        <a href="models_controller_contacts-people-api.js.html">models/controller/contacts-people-api.js</a>, <a href="models_controller_contacts-people-api.js.html#line108">line 108</a>
     </li></ul></dd>
     
 
@@ -405,6 +542,28 @@ given callback function.
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Contact data formated as the Google People API will receive it
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -416,7 +575,7 @@ given callback function.
     
 
     
-    <h4 class="name" id="getNewToken"><span class="type-signature"></span>getNewToken<span class="signature">(oAuth2Client, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="generatePrismaContact"><span class="type-signature"></span>generatePrismaContact<span class="signature">(googleContact)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -424,8 +583,9 @@ given callback function.
 
 
 <div class="description">
-    Get and store new token after prompting for user authorization, and then
-execute the given callback with the authorized OAuth2 client.
+    Based on the given Google contact data, generate the
+corresponding contact data record in the form we would
+store in the DB.
 </div>
 
 
@@ -461,13 +621,13 @@ execute the given callback with the authorized OAuth2 client.
 
         <tr>
             
-                <td class="name"><code>oAuth2Client</code></td>
+                <td class="name"><code>googleContact</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">google.auth.OAuth2</span>
+<span class="param-type">Object</span>
 
 
             
@@ -477,30 +637,7 @@ execute the given callback with the authorized OAuth2 client.
 
             
 
-            <td class="description last">The OAuth2 client to get token for.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">getEventsCallback</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The callback for the authorized client.</td>
+            <td class="description last">Contact data from Google People API</td>
         </tr>
 
     
@@ -541,7 +678,7 @@ execute the given callback with the authorized OAuth2 client.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_google-people-router.js.html">routes/google-people-router.js</a>, <a href="routes_google-people-router.js.html#line44">line 44</a>
+        <a href="models_controller_contacts-people-api.js.html">models/controller/contacts-people-api.js</a>, <a href="models_controller_contacts-people-api.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -566,6 +703,28 @@ execute the given callback with the authorized OAuth2 client.
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Contact data in the form we would store in the DB
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -577,7 +736,7 @@ execute the given callback with the authorized OAuth2 client.
     
 
     
-    <h4 class="name" id="listConnectionNames"><span class="type-signature"></span>listConnectionNames<span class="signature">(auth)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="importContacts"><span class="type-signature">(async) </span>importContacts<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -585,7 +744,8 @@ execute the given callback with the authorized OAuth2 client.
 
 
 <div class="description">
-    Print the display name if available for 10 connections.
+    This function imports the contact(s) fetched from google contacts  
+using the People API
 </div>
 
 
@@ -603,8 +763,6 @@ execute the given callback with the authorized OAuth2 client.
     <thead>
     <tr>
         
-        <th>Name</th>
-        
 
         <th>Type</th>
 
@@ -621,13 +779,11 @@ execute the given callback with the authorized OAuth2 client.
 
         <tr>
             
-                <td class="name"><code>auth</code></td>
-            
 
             <td class="type">
             
                 
-<span class="param-type">google.auth.OAuth2</span>
+<span class="param-type">object</span>
 
 
             
@@ -637,7 +793,8 @@ execute the given callback with the authorized OAuth2 client.
 
             
 
-            <td class="description last">An authorized OAuth2 client.</td>
+            <td class="description last">peeps - The contact object we are importing to the
+database</td>
         </tr>
 
     
@@ -678,7 +835,7 @@ execute the given callback with the authorized OAuth2 client.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_google-people-router.js.html">routes/google-people-router.js</a>, <a href="routes_google-people-router.js.html#line74">line 74</a>
+        <a href="models_controller_contacts-people-api.js.html">models/controller/contacts-people-api.js</a>, <a href="models_controller_contacts-people-api.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -703,6 +860,29 @@ execute the given callback with the authorized OAuth2 client.
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - returns all the new contacts we have imported
+into the database
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1063,6 +1243,191 @@ execute the given callback with the authorized OAuth2 client.
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="postContact"><span class="type-signature"></span>postContact<span class="signature">(googleToken, prismaContact)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function will create a new contact in Google Contacts using the 
+People API.
+This will be done when a new contact is created using the /contact 
+route.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>googleToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">-</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prismaContact</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Contact data in the form we receive from the front end or the DB</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_controller_contacts-people-api.js.html">models/controller/contacts-people-api.js</a>, <a href="models_controller_contacts-people-api.js.html#line85">line 85</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The unique ID assigned by Google for the new Google contact
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1078,13 +1443,13 @@ execute the given callback with the authorized OAuth2 client.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-controller_cases.html">controller/cases</a></li><li><a href="module-controller_contacts.html">controller/contacts</a></li><li><a href="module-middleware_404.html">middleware/404</a></li><li><a href="module-middleware_error.html">middleware/error</a></li><li><a href="module-router_cases.html">router/cases</a></li><li><a href="module-router_contacts.html">router/contacts</a></li><li><a href="module-router_notes.html">router/notes</a></li><li><a href="module-router_users.html">router/users</a></li><li><a href="module-src_auth_middleware.html">src/auth/middleware</a></li><li><a href="module-src_auth_users-model.html">src/auth/users-model</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authorize">authorize</a></li><li><a href="global.html#getNewToken">getNewToken</a></li><li><a href="global.html#listConnectionNames">listConnectionNames</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-controller_cases.html">controller/cases</a></li><li><a href="module-controller_contacts.html">controller/contacts</a></li><li><a href="module-middleware_404.html">middleware/404</a></li><li><a href="module-middleware_error.html">middleware/error</a></li><li><a href="module-router_cases.html">router/cases</a></li><li><a href="module-router_contacts.html">router/contacts</a></li><li><a href="module-router_notes.html">router/notes</a></li><li><a href="module-router_users.html">router/users</a></li><li><a href="module-src_auth_middleware.html">src/auth/middleware</a></li><li><a href="module-src_auth_users-model.html">src/auth/users-model</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authorize">authorize</a></li><li><a href="global.html#fetchContacts">fetchContacts</a></li><li><a href="global.html#generateGoogleContact">generateGoogleContact</a></li><li><a href="global.html#generatePrismaContact">generatePrismaContact</a></li><li><a href="global.html#importContacts">importContacts</a></li><li><a href="global.html#postContact">postContact</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Nov 14 2019 07:40:24 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Nov 15 2019 05:33:38 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
