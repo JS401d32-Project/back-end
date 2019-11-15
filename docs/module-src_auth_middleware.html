@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: middleware/error.js</title>
+    <title>JSDoc: Module: src/auth/middleware</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,38 +17,132 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: middleware/error.js</h1>
+    <h1 class="page-title">Module: src/auth/middleware</h1>
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>'use strict';
-/**
- * @module
- */
 
-/**
- * Middleware to handle 500 responses if the server experiences an error.
- * @param err - Error
- * @param req - Request object
- * @param res - Response object
- * @param next - Calls the next middleware function
- */
-module.exports = (err, req, res, next) => {
-  let error = { error: err };
-  res.statusCode = 500;
-  res.statusMessage = 'Server Error';
-  res.setHeader('Content-Type', 'application/json');
-  res.write( JSON.stringify(error) );
-  res.end();
-};
-</code></pre>
-        </article>
-    </section>
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Authentication Middleware</div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth_middleware.js.html">auth/middleware.js</a>, <a href="auth_middleware.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

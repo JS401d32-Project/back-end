@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: router/contacts</title>
+    <title>JSDoc: Module: controller/cases</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: router/contacts</h1>
+    <h1 class="page-title">Module: controller/cases</h1>
 
     
 
@@ -48,8 +48,6 @@
 
         <ul>
             <li>module:express</li>
-        
-            <li>module:fuzzy-search</li>
         </ul>
     
 
@@ -80,202 +78,7 @@
 
 
 <div class="description">
-    This function gets all contacts data from database.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">express path - *optional name query field</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">express callback</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_contacts-router.js.html">routes/contacts-router.js</a>, <a href="routes_contacts-router.js.html#line24">line 24</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - an array of all contacts optionally
-filtered by 'name' query
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-|
-
-<span class="param-type">Error</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-        <p class="code-caption">Example query string</p>
-    
-    <pre class="prettyprint"><code>localhost:4000/contacts/?name=john
-returns all contacts that have John in the first or last name
-fields filtered and sorted by fuzzy search.</code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~GET/:id"><span class="type-signature">(inner) </span>GET/:id<span class="signature">(path, callback)</span><span class="type-signature"> &rarr; {Object|Error}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function gets a contact from database.
+    This function gets all case data from database
 </div>
 
 
@@ -391,7 +194,7 @@ fields filtered and sorted by fuzzy search.</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_contacts-router.js.html">routes/contacts-router.js</a>, <a href="routes_contacts-router.js.html#line40">line 40</a>
+        <a href="models_controller_cases-controller.js.html">models/controller/cases-controller.js</a>, <a href="models_controller_cases-controller.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -420,7 +223,377 @@ fields filtered and sorted by fuzzy search.</code></pre>
 
         
 <div class="param-desc">
-    - a single contact object
+    - an array of all cases
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Error</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~GET/:id"><span class="type-signature">(inner) </span>GET/:id<span class="signature">(path, callback)</span><span class="type-signature"> &rarr; {Object|Error}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function gets a case from database
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">express path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">express callback</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_controller_cases-controller.js.html">models/controller/cases-controller.js</a>, <a href="models_controller_cases-controller.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - a single case object
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Error</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~PATCH/:id"><span class="type-signature">(inner) </span>PATCH/:id<span class="signature">(path, callback)</span><span class="type-signature"> &rarr; {Object|Error}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function gets a case from database
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">express path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">express callback</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_controller_cases-controller.js.html">models/controller/cases-controller.js</a>, <a href="models_controller_cases-controller.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - a single case object that was created
 </div>
 
 
@@ -460,7 +633,7 @@ fields filtered and sorted by fuzzy search.</code></pre>
 
 
 <div class="description">
-    This function creates a new contact in the database.
+    This function creates a new case in the database
 </div>
 
 
@@ -576,7 +749,7 @@ fields filtered and sorted by fuzzy search.</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_contacts-router.js.html">routes/contacts-router.js</a>, <a href="routes_contacts-router.js.html#line14">line 14</a>
+        <a href="models_controller_cases-controller.js.html">models/controller/cases-controller.js</a>, <a href="models_controller_cases-controller.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -605,7 +778,7 @@ fields filtered and sorted by fuzzy search.</code></pre>
 
         
 <div class="param-desc">
-    - the newly created contact object
+    - the newly created case object
 </div>
 
 

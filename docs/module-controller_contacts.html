@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: router/contacts</title>
+    <title>JSDoc: Module: controller/contacts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: router/contacts</h1>
+    <h1 class="page-title">Module: controller/contacts</h1>
 
     
 
@@ -196,7 +196,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_contacts-router.js.html">routes/contacts-router.js</a>, <a href="routes_contacts-router.js.html#line24">line 24</a>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -275,7 +275,7 @@ fields filtered and sorted by fuzzy search.</code></pre>
 
 
 <div class="description">
-    This function gets a contact from database.
+    This function gets a contact from database
 </div>
 
 
@@ -391,7 +391,7 @@ fields filtered and sorted by fuzzy search.</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_contacts-router.js.html">routes/contacts-router.js</a>, <a href="routes_contacts-router.js.html#line40">line 40</a>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line128">line 128</a>
     </li></ul></dd>
     
 
@@ -452,6 +452,502 @@ fields filtered and sorted by fuzzy search.</code></pre>
     
 
     
+    <h4 class="name" id="~handleFetchContacts"><span class="type-signature">(async, inner) </span>handleFetchContacts<span class="signature">(request, response)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function is used for both fetching the contacts, and also the
+function that fetches and imports contacts to the database.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - the contacts from the People API
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~handleImportContacts"><span class="type-signature">(async, inner) </span>handleImportContacts<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function imports the fetched contacts into the prisma database
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">request</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - the imported contacts
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~handlePostGoogleContact"><span class="type-signature">(async, inner) </span>handlePostGoogleContact<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function will create a new contact in Google Contacts using the
+People API. This will be done when a new contact is created using 
+the /contact route.  Therefore, the contact info will be in the 
+prisma database as well as  Google Contacts.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">will contain the new contact entry</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line87">line 87</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The unique ID assigned by Google for the new Google contact
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="~POST"><span class="type-signature">(inner) </span>POST<span class="signature">(path, callback)</span><span class="type-signature"> &rarr; {Object|Error}</span></h4>
     
 
@@ -460,7 +956,8 @@ fields filtered and sorted by fuzzy search.</code></pre>
 
 
 <div class="description">
-    This function creates a new contact in the database.
+    This function creates a new contact in the database and a
+corresponding Google contact in the Google account of the user.
 </div>
 
 
@@ -576,7 +1073,7 @@ fields filtered and sorted by fuzzy search.</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_contacts-router.js.html">routes/contacts-router.js</a>, <a href="routes_contacts-router.js.html#line14">line 14</a>
+        <a href="models_controller_contacts-controller.js.html">models/controller/contacts-controller.js</a>, <a href="models_controller_contacts-controller.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
