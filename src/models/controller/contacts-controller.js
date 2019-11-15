@@ -5,18 +5,10 @@
  * @requires fuzzy-search
  */
 
-// alternatively, you can used the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
-// const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-
 const FuzzySearch = require('fuzzy-search');
 const { prisma } = require('../../../prisma-database/generated/prisma-client');
-
-const {
-  postContact,
-  fetchContacts,
-  importContacts,
-} = require('./contacts-people-api');
+const { postContact, fetchContacts, importContacts } = require('./contacts-people-api');
 
 /** 
  * This function is used for both fetching the contacts, and also the
@@ -27,13 +19,13 @@ const {
  * @returns {object} - the contacts from the People API
  */
 const handleFetchContacts = async (request, response) => {
-  // alternatively, you can used the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
+  // alternatively, you can use the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
   // const signed_token = request.cookies['X-401d19-OAuth-token'];
   let [, signed_token] = request.headers.authorization.split(/\s+/);
 
-  const token = jwt.verify(signed_token, process.env.SECRET);
+  const googleToken = jwt.verify(signed_token, process.env.SECRET).googleToken;
 
-  const peeps = await fetchContacts(token.googleToken);
+  const peeps = await fetchContacts(googleToken);
   response.json(peeps);
 };
 
@@ -44,19 +36,18 @@ const handleFetchContacts = async (request, response) => {
  * @returns {object} - the imported contacts
  */
 const handleImportContacts = async (request, response) => {
-  // alternatively, you can used the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
+  // alternatively, you can use the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
   // const signed_token = request.cookies['X-401d19-OAuth-token'];
   let [, signed_token] = request.headers.authorization.split(/\s+/);
 
-  const token = jwt.verify(signed_token, process.env.SECRET);
-  const peeps = await fetchContacts(token.googleToken);
+  const googleToken = jwt.verify(signed_token, process.env.SECRET).googleToken;
+  const peeps = await fetchContacts(googleToken);
   const imported_peeps = await importContacts(peeps);
   // we're also going to save them to the database
   // we will get nulls if they already exist in the database
   // we don't want to show nulls, so we use filter
   response.json(imported_peeps.filter(x => x));
 };
-
 
 /**
  * This function creates a new contact in the database and a
@@ -68,26 +59,19 @@ const handleImportContacts = async (request, response) => {
  * @returns { (Object | Error) } - the newly created contact object
  */
 async function handleCreateNewContact(req, res) {
-  // alternatively, you can used the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
+  // alternatively, you can use the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
   // const signed_token = req.cookies['X-401d19-OAuth-token'];
   let [, signed_token] = req.headers.authorization.split(/\s+/);
-  console.log('=====> signed_token', signed_token);
   const googleToken = jwt.verify(signed_token, process.env.SECRET).googleToken;
-  console.log('=====> googleToken', googleToken);
 
-  console.log('req.body ========> ', req.body);
+  // move req.body to a data structure we can safely alter
+  // so we can add the unique ID assigned by Google.
+  const { ...contactData } = req.body;
   
-
-  const givenName = req.body.firstName;
-  const familyName = req.body.lastName;
-  const personId = await postContact(googleToken, givenName);
-  console.log('googlePerson  ========>', personId);
-  req.body.googleResourceName = personId;
-  console.log('req.body ========> ', req.body);
-
-  const newContact = await prisma.createContact(req.body);
+  const personId = await postContact(googleToken, contactData);
+  contactData.googleResourceName = personId;
+  const newContact = await prisma.createContact(contactData);
   console.log('prisma newContact ========>', newContact);
-
   res.json(newContact);
 }
 
@@ -101,20 +85,13 @@ async function handleCreateNewContact(req, res) {
  * @returns {String} - The unique ID assigned by Google for the new Google contact
  */
 const handlePostGoogleContact = async (req, res) => {
-  // alternatively, you can used the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
+  // alternatively, you can use the cookie line below as opposed to the authorization header, but cookies are not implemented on the front end as of now.
   // const signed_token = req.cookies['X-401d19-OAuth-token'];
   let [, signed_token] = req.headers.authorization.split(/\s+/);
   console.log('=====> signed_token', signed_token);
   const googleToken = jwt.verify(signed_token, process.env.SECRET).googleToken;
   console.log('=====> googleToken', googleToken);
-
-  const givenName = req.body.firstName;
-  const familyName = req.body.lastName;
-  const phoneNumbers = [req.body.cellPhone, req.body.workPhone, req.body.homePhone];
-  const emailAddresses = [req.body.emailMain, req.body.emailBackup]; // TODO: emailAddresses
-
-  const personId = await postContact(googleToken, givenName, emailAddresses, phoneNumbers);
-
+  const personId = await postContact(googleToken, req.body);
   res.json(personId);
 };
 

@@ -1121,6 +1121,7 @@ export interface UserWhereInput {
 
 export type ContactWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  googleResourceName?: Maybe<String>;
 }>;
 
 export type ImportantDateWhereUniqueInput = AtLeastOne<{

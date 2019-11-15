@@ -1555,6 +1555,7 @@ input ContactWhereInput {
 
 input ContactWhereUniqueInput {
   id: ID
+  googleResourceName: String
 }
 
 scalar DateTime

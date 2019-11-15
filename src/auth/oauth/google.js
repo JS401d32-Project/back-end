@@ -2,9 +2,7 @@
 
 const superagent = require('superagent');
 const Users = require('../users-model.js');
-const querystring = require('querystring');
 const { prisma } = require('../../../prisma-database/generated/prisma-client');
-const {google} = require('googleapis');
 
 /**
  * Retrieves a session token for a user associated with the authorizing Google
@@ -70,4 +68,4 @@ const userFromOauth = (userData) => {
     });
 };
 
-module.exports = {authorize};
+module.exports = { authorize };

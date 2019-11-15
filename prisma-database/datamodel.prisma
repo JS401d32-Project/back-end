@@ -29,7 +29,7 @@ type Case {
 
 type Contact {
   id: ID! @id
-  googleResourceName: String
+  googleResourceName: String @unique
   contactType: String
   firstName: String!
   lastName: String!
