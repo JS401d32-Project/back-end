@@ -4,6 +4,7 @@
 ​
 ​
 **DISCLAIMER FOR WINDOWS USERS**
+
 ​
 In order for Prisma/Docker to work for you, the following is required:
 ​
@@ -93,3 +94,5 @@ The app uses Postgres and Prisma for our database stack.
   - Matthew Heyert
   - Johnathon Kimball
   - Corey Marchand
+  
+  ![uml](https://github.com/JS401d32-Project/back-end/blob/master/assets/CaseHawk%20UML.png?raw=true)
